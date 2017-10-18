@@ -1,0 +1,7 @@
+docker run -d --name=registrator \
+		--restart always \
+		--network executor-net \
+		--volume=/var/run/docker.sock:/tmp/docker.sock \
+		gliderlabs/registrator:latest \
+		-internal \
+		consul://192.168.99.100:8500

@@ -4,7 +4,7 @@ import validators
 from random import uniform
 from time import sleep
 
-converter_service_unit = 'http://127.0.0.1:8080/convert'
+converter_service_unit = 'http://192.168.99.100:8080/convert'
 
 def send_to_converter(data):
     headers = {'Content-type': 'application/json'}

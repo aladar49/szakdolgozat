@@ -12,7 +12,7 @@ def convert(body):
     timestamp = str('{:%Y%m%d_%H%M%S_%f}'.format(datetime.now()))
     ydl_opts = {
         'format': 'best[height<=1080]',
-        'outtmpl': '/tmp/videos/'+timestamp
+        'outtmpl': '/workspace/videos/'+timestamp
     }
     
     
@@ -20,11 +20,11 @@ def convert(body):
         ydl.download([body['yt_link']])   
     
     ff = FFmpeg(
-        inputs={'/tmp/videos/'+timestamp: None},
-        outputs={'/tmp/videos/'+timestamp+'.mp4': '-f mp4 -vf scale=320:-2 -c:a aac -strict -2'}
+        inputs={'/workspace/videos/'+timestamp: None},
+        outputs={'/workspace/videos/'+timestamp+'.mp4': '-f mp4 -vf scale=320:-2 -c:a aac -strict -2'}
     )
     ff.run()
-    remove('/tmp/videos/'+timestamp)
+    remove('/workspace/videos/'+timestamp)
     
 @app.route('/convert', methods=['POST'])
 def converter_handle():
@@ -38,6 +38,17 @@ def converter_handle():
         return 'Proccess started', 200
     else:
         return 'There is not free thread.', 500
+
+@app.route('/check', methods=['GET'])
+def vheck_handle():
+    runable_thread = MAX_THREAD
+    for task in tasks:
+        if not task.done():
+            runable_thread -= 1
+    if runable_thread > 0:
+        return 'UP.', 200
+    else:
+        return 'Down.', 404
 
 pool = ThreadPoolExecutor(max_workers = MAX_THREAD)
 tasks = []

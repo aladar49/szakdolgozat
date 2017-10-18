@@ -1,0 +1,6 @@
+docker run -d --name consul \
+		--restart always \
+		-p "8500:8500" \
+		-h "consul" \
+		consul agent -ui \
+		-server -bootstrap -client "0.0.0.0"

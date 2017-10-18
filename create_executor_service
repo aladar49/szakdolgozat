@@ -1,0 +1,7 @@
+docker service create \
+		--name executor \
+		--replicas 2 \
+		--env MAX_THREAD=2 \
+		--label "SERVICE_NAME=executor" \
+		--mount type=bind,source=/workspace/videos,target=/workspace/videos,readonly=false \
+		executor

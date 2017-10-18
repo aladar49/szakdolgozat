@@ -1,10 +1,9 @@
 FROM python:3.6.2
 
 ENV MAX_THREAD 2
-ENV SCHEDULER_URL 0.0.0.0
 
 ADD /app /app
-VOLUME /tmp/videos
+VOLUME /workspace/videos
 
 EXPOSE 8080
 
