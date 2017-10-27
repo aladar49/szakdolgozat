@@ -7,9 +7,16 @@ defaults
     timeout connect 5000ms
     timeout client 60000ms
     timeout server 60000ms
+    stats enable
+    stats uri /haproxy?stats
+    stats auth admin:admin
 
-listen http-in
+frontend http
     bind *:8080
+    mode http
+    use_backend converter
+
+backend converter
     mode http
     option httpchk get /check
     http-check expect status 200

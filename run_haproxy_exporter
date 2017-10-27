@@ -1,0 +1,5 @@
+docker run -d -p 9101:9101 \
+		--name haproxy-exporter \
+		--restart always \
+		quay.io/prometheus/haproxy-exporter:v0.8.0 \
+		--haproxy.scrape-uri="http://admin:admin@192.168.99.100:8080/haproxy?stats;csv"

@@ -1,0 +1,6 @@
+docker run -p 9100:9100 \
+		-v /proc:/host/proc \
+		-v /sys:/host/sys \
+		-v "/:/rootfs" \
+		--restart always \
+		prom/node-exporter

@@ -1,0 +1,6 @@
+docker run -p 9090:9090 \
+		-v /workspace/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+		--restart always \
+		--name prometheus \
+		-d \
+	       	prom/prometheus

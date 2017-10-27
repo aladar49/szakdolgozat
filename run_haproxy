@@ -1,5 +1,6 @@
 docker run -d --name haproxy \
 		-p 8080:8080 \
+		--restart always \
 		--net executor-net \
 		-v /workspace/haproxy:/tmp \
 		haproxy
